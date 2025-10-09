@@ -6,7 +6,6 @@ import { tmdbService, Movie } from '@/services/tmdb';
 import { Loader2, ChevronRight } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { handleSecureError } from '@/lib/error-handler';
-import { useInView } from 'react-intersection-observer';
 
 interface MovieCategoryCardProps {
   title: string;
@@ -39,12 +38,6 @@ export function MovieCategoryCard({
   const [hasMore, setHasMore] = useState(true);
   const { toast } = useToast();
 
-  // Infinite scroll setup
-  const { ref, inView } = useInView({
-    threshold: 0.1,
-    triggerOnce: false,
-  });
-
   // Reset and reload when category or filters change
   useEffect(() => {
     setCurrentPage(1);
@@ -52,13 +45,6 @@ export function MovieCategoryCard({
     setHasMore(true);
     loadMovies(1, false);
   }, [category, selectedGenre, selectedYear, selectedSort, selectedAdult, selectedLanguage]);
-
-  // Auto-load more when scroll sentinel comes into view
-  useEffect(() => {
-    if (inView && hasMore && !loading && movies.length > 0) {
-      loadMovies(currentPage + 1, true);
-    }
-  }, [inView, hasMore, loading, currentPage, movies.length]);
 
   const loadMovies = async (page = 1, append = false) => {
     try {
@@ -154,20 +140,17 @@ export function MovieCategoryCard({
               </div>
             )}
             
-            {/* Infinite Scroll Sentinel and Load More Button */}
-            {hasMore && (
-              <div ref={ref} className="flex justify-center mt-8">
-                {!loading && (
-                  <EnhancedButton
-                    onClick={handleLoadMore}
-                    variant="premium"
-                    size="lg"
-                    className="animate-pulse"
-                  >
-                    Load More Movies
-                    <ChevronRight className="ml-1 h-4 w-4" />
-                  </EnhancedButton>
-                )}
+            {/* Load More Button */}
+            {hasMore && !loading && (
+              <div className="flex justify-center mt-8">
+                <EnhancedButton
+                  onClick={handleLoadMore}
+                  variant="premium"
+                  size="lg"
+                >
+                  Load More Movies
+                  <ChevronRight className="ml-1 h-4 w-4" />
+                </EnhancedButton>
               </div>
             )}
           </>
