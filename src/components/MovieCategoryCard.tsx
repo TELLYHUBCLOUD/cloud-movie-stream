@@ -51,33 +51,33 @@ export function MovieCategoryCard({
       setLoading(true);
       let response;
       
-      // Apply filters based on category
-      const shouldApplyFilters = category === 'popular' || category === 'top_rated';
-      
-      if (shouldApplyFilters) {
-        // Use discover API with filters for popular and top_rated categories
-        const discoverParams = {
-          page,
-          with_genres: selectedGenre === 'all' ? '' : selectedGenre,
-          year: selectedYear === 'all' ? '' : selectedYear,
-          sort_by: category === 'popular' ? 'popularity.desc' : 'vote_average.desc',
-          adult_filter: selectedAdult === 'all' ? '' : selectedAdult,
-          with_original_language: selectedLanguage === 'all' ? '' : selectedLanguage,
-        };
-        response = await tmdbService.discoverMovies(discoverParams);
-      } else {
-        // Use specific endpoints for latest and upcoming
-        switch (category) {
-          case 'latest':
-            response = await tmdbService.getLatestMovies(page);
-            break;
-          case 'upcoming':
-            response = await tmdbService.getUpcomingMovies(page);
-            break;
-          default:
-            response = await tmdbService.getPopularMovies(page);
-        }
+      // Determine sort_by based on category
+      let sortBy = 'popularity.desc';
+      if (category === 'top_rated') {
+        sortBy = 'vote_average.desc';
+      } else if (category === 'latest') {
+        sortBy = 'release_date.desc';
+      } else if (category === 'upcoming') {
+        sortBy = 'release_date.asc';
       }
+      
+      // Apply filters for all categories using discover API
+      const discoverParams = {
+        page,
+        with_genres: selectedGenre === 'all' ? '' : selectedGenre,
+        year: selectedYear === 'all' ? '' : selectedYear,
+        sort_by: sortBy,
+        adult_filter: selectedAdult === 'all' ? '' : selectedAdult,
+        with_original_language: selectedLanguage === 'all' ? '' : selectedLanguage,
+      };
+      
+      // Add release date filters for upcoming movies
+      if (category === 'upcoming') {
+        const today = new Date().toISOString().split('T')[0];
+        discoverParams['primary_release_date.gte'] = today;
+      }
+      
+      response = await tmdbService.discoverMovies(discoverParams);
       
       if (append) {
         setMovies(prev => [...prev, ...response.results]);
