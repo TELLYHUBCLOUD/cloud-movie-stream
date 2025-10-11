@@ -187,12 +187,12 @@ const Index = () => {
       />
 
       {/* Security Notice */}
-      <div className="container mx-auto px-4 py-2">
+      <div className="container mx-auto px-4 py-2 animate-fade-in">
         <SecurityNotice />
       </div>
 
       {/* Movie Categories */}
-      <div className="container mx-auto px-4 py-8 space-y-8">
+      <div className="container mx-auto px-4 py-4 sm:py-6 lg:py-8 space-y-6 sm:space-y-8">
         <MovieCategoryCard
           title="Trending Movies"
           category="popular"

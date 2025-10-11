@@ -33,17 +33,17 @@ export function FilterSection({
   const years = Array.from({ length: currentYear - 1900 + 1 }, (_, i) => currentYear - i);
 
   return (
-    <section className="py-8 px-4">
+    <section className="py-4 sm:py-6 lg:py-8 px-4 animate-fade-in">
       <div className="container mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3 sm:gap-4">
           {/* Genre Filter */}
-          <div className="space-y-2">
-            <label className="text-sm font-medium text-muted-foreground">Genre</label>
+          <div className="space-y-1.5 sm:space-y-2">
+            <label className="text-xs sm:text-sm font-medium text-muted-foreground">Genre</label>
             <Select value={selectedGenre} onValueChange={onGenreChange}>
-              <SelectTrigger className="bg-card/50 border-border/50">
+              <SelectTrigger className="bg-card/50 border-border/50 h-9 sm:h-10 text-xs sm:text-sm transition-all duration-300 hover:bg-card/70">
                 <SelectValue placeholder="All Genres" />
               </SelectTrigger>
-              <SelectContent className="bg-card border-border">
+              <SelectContent className="bg-card border-border z-50">
                 <SelectItem value="all">All Genres</SelectItem>
                 {genres.map((genre) => (
                   <SelectItem key={genre.id} value={genre.id.toString()}>
@@ -55,13 +55,13 @@ export function FilterSection({
           </div>
 
           {/* Year Filter */}
-          <div className="space-y-2">
-            <label className="text-sm font-medium text-muted-foreground">Year</label>
+          <div className="space-y-1.5 sm:space-y-2">
+            <label className="text-xs sm:text-sm font-medium text-muted-foreground">Year</label>
             <Select value={selectedYear} onValueChange={onYearChange}>
-              <SelectTrigger className="bg-card/50 border-border/50">
+              <SelectTrigger className="bg-card/50 border-border/50 h-9 sm:h-10 text-xs sm:text-sm transition-all duration-300 hover:bg-card/70">
                 <SelectValue placeholder="All Years" />
               </SelectTrigger>
-              <SelectContent className="bg-card border-border max-h-60">
+              <SelectContent className="bg-card border-border max-h-60 z-50">
                 <SelectItem value="all">All Years</SelectItem>
                 {years.slice(0, 30).map((year) => (
                   <SelectItem key={year} value={year.toString()}>
@@ -73,13 +73,13 @@ export function FilterSection({
           </div>
 
           {/* Adult Content Filter */}
-          <div className="space-y-2">
-            <label className="text-sm font-medium text-muted-foreground">Content</label>
+          <div className="space-y-1.5 sm:space-y-2 col-span-2 sm:col-span-1">
+            <label className="text-xs sm:text-sm font-medium text-muted-foreground">Content</label>
             <Select value={selectedAdult} onValueChange={onAdultChange}>
-              <SelectTrigger className="bg-card/50 border-border/50">
+              <SelectTrigger className="bg-card/50 border-border/50 h-9 sm:h-10 text-xs sm:text-sm transition-all duration-300 hover:bg-card/70">
                 <SelectValue placeholder="All Content" />
               </SelectTrigger>
-              <SelectContent className="bg-card border-border">
+              <SelectContent className="bg-card border-border z-50">
                 <SelectItem value="all">All Content</SelectItem>
                 <SelectItem value="false">Family Friendly</SelectItem>
                 <SelectItem value="true">Adult Content</SelectItem>
@@ -88,13 +88,13 @@ export function FilterSection({
           </div>
 
           {/* Language Filter */}
-          <div className="space-y-2">
-            <label className="text-sm font-medium text-muted-foreground">Language</label>
+          <div className="space-y-1.5 sm:space-y-2 col-span-2 sm:col-span-1">
+            <label className="text-xs sm:text-sm font-medium text-muted-foreground">Language</label>
             <Select value={selectedLanguage} onValueChange={onLanguageChange}>
-              <SelectTrigger className="bg-card/50 border-border/50">
+              <SelectTrigger className="bg-card/50 border-border/50 h-9 sm:h-10 text-xs sm:text-sm transition-all duration-300 hover:bg-card/70">
                 <SelectValue placeholder="All Languages" />
               </SelectTrigger>
-              <SelectContent className="bg-card border-border max-h-60">
+              <SelectContent className="bg-card border-border max-h-60 z-50">
                 <SelectItem value="all">All Languages</SelectItem>
                 {languages.map((language) => (
                   <SelectItem key={language.iso_639_1} value={language.iso_639_1}>
@@ -106,13 +106,13 @@ export function FilterSection({
           </div>
 
           {/* Sort Filter */}
-          <div className="space-y-2">
-            <label className="text-sm font-medium text-muted-foreground">Sort By</label>
+          <div className="space-y-1.5 sm:space-y-2 col-span-2 sm:col-span-1">
+            <label className="text-xs sm:text-sm font-medium text-muted-foreground">Sort By</label>
             <Select value={selectedSort} onValueChange={onSortChange}>
-              <SelectTrigger className="bg-card/50 border-border/50">
+              <SelectTrigger className="bg-card/50 border-border/50 h-9 sm:h-10 text-xs sm:text-sm transition-all duration-300 hover:bg-card/70">
                 <SelectValue placeholder="Sort By" />
               </SelectTrigger>
-              <SelectContent className="bg-card border-border">
+              <SelectContent className="bg-card border-border z-50">
                 <SelectItem value="popularity.desc">Most Popular</SelectItem>
                 <SelectItem value="vote_average.desc">Highest Rated</SelectItem>
                 <SelectItem value="release_date.desc">Latest Release</SelectItem>
