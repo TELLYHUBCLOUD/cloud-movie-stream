@@ -33,6 +33,18 @@ export function MovieCard({ movie, onClick, onPlay }: MovieCardProps) {
         
         {/* Hover Overlay */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300" />
+        
+        {/* Play Button - Center of Poster */}
+        <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300">
+          <EnhancedButton
+            size="lg"
+            variant="play"
+            onClick={handlePlayClick}
+            className="rounded-full w-16 h-16 sm:w-20 sm:h-20 transition-all duration-300 hover:scale-110 shadow-2xl"
+          >
+            <Play className="w-6 h-6 sm:w-8 sm:h-8 fill-current" />
+          </EnhancedButton>
+        </div>
       </div>
       
       {/* Movie Info Footer */}
@@ -54,25 +66,16 @@ export function MovieCard({ movie, onClick, onPlay }: MovieCardProps) {
           </span>
         </div>
 
-        {/* Action Buttons */}
-        <div className="flex gap-1.5 sm:gap-2 opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
-          <EnhancedButton
-            size="sm"
-            variant="play"
-            onClick={handlePlayClick}
-            className="flex-1 h-7 sm:h-8 text-xs transition-all duration-300 hover:scale-105"
-          >
-            <Play className="w-3 h-3 mr-1" />
-            <span className="hidden sm:inline">Play</span>
-          </EnhancedButton>
+        {/* Info Button */}
+        <div className="opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
           <EnhancedButton
             size="sm"
             variant="glass"
             onClick={handleCardClick}
-            className="flex-1 h-7 sm:h-8 text-xs transition-all duration-300 hover:scale-105"
+            className="w-full h-7 sm:h-8 text-xs transition-all duration-300 hover:scale-105"
           >
             <Info className="w-3 h-3 mr-1" />
-            <span className="hidden sm:inline">Info</span>
+            <span>More Info</span>
           </EnhancedButton>
         </div>
       </div>
