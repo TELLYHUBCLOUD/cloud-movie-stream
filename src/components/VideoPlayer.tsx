@@ -488,6 +488,8 @@ export function VideoPlayer({ movieId, movieTitle, isOpen, onClose }: VideoPlaye
             allowFullScreen
             frameBorder="0"
             title={movieTitle}
+            sandbox="allow-same-origin allow-scripts allow-forms allow-presentation allow-popups"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
             onLoad={() => setIsLoading(false)}
           />
         ) : (
