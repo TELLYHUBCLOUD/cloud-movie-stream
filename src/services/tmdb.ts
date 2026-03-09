@@ -3,10 +3,7 @@ import { env } from '@/lib/env';
 
 // Use environment variable for API key security
 const API_KEY = env.TMDB_API_KEY;
-// Use CORS proxy to avoid browser blocking
-const CORS_PROXY = 'https://corsproxy.io/?';
-const TMDB_BASE = 'https://api.themoviedb.org/3';
-const BASE_URL = CORS_PROXY + encodeURIComponent(TMDB_BASE).replace(/%2F/g, '/').replace(/%3A/g, ':');
+const BASE_URL = 'https://api.themoviedb.org/3';
 
 // Rate limiter to prevent API abuse
 const rateLimiter = new RateLimiter(100, 60000);
