@@ -33,7 +33,7 @@ export function Navbar({ onSearch, searchResults, onSelectMovie }: NavbarProps) 
           {/* Logo */}
           <div className="flex items-center space-x-4">
             <h1 className="text-2xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-              CLOUDSTREAM
+              TellYFlixHub
             </h1>
           </div>
 
